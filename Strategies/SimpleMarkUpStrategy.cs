@@ -27,8 +27,8 @@ namespace SudokuSolver.Strategies
                     //if the state is not already solved, go ahead and solve it.
                     if (sudokuBoard[row, col] == 0 || sudokuBoard[row, col].ToString().Length > 1)
                     {
-                        var possibilitiesInRowAndCol = GetPossibilitiesInRowAndCol(sudokuBoard, row, col);
-                        var possibilitiesInBlock = GetPossibilitiesInBlock(sudokuBoard, row, col);
+                        int possibilitiesInRowAndCol = GetPossibilitiesInRowAndCol(sudokuBoard, row, col);
+                        int possibilitiesInBlock = GetPossibilitiesInBlock(sudokuBoard, row, col);
                         sudokuBoard[row, col] = GetPossibilityIntersection(possibilitiesInRowAndCol, possibilitiesInBlock);
                     }
                 }
@@ -47,7 +47,7 @@ namespace SudokuSolver.Strategies
             return Convert.ToInt32(String.Join(string.Empty, possibilitiesSubset));
         }
 
-        private object GetPossibilitiesInBlock(int[,] sudokuBoard, int givenRow, int givenCol)
+        private int GetPossibilitiesInBlock(int[,] sudokuBoard, int givenRow, int givenCol)
         {
             int[] possibilities = { 1, 2, 3, 4, 5, 6, 7, 8, 9 };
             var sudokuMap = _sudokuMapper.Find(givenRow, givenCol);
@@ -62,7 +62,7 @@ namespace SudokuSolver.Strategies
             return Convert.ToInt32(String.Join(string.Empty, possibilities.Select(p => p).Where(p => p != 0)));
         }
 
-        private object GetPossibilitiesInRowAndCol(int[,] sudokuBoard, int givenRow, int givenCol)
+        private int GetPossibilitiesInRowAndCol(int[,] sudokuBoard, int givenRow, int givenCol)
         {
             int[] possibilities = { 1, 2, 3, 4, 5, 6, 7, 8, 9 };
 
